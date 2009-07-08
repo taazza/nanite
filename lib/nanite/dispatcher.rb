@@ -13,7 +13,8 @@ module Nanite
     end
 
     def dispatch(deliverable)
-      prefix, meth = deliverable.type.split('/')[1..-1]
+      deliverable.type =~ /\/(.+)\/(.+)/
+      prefix, meth = $1, $2
       meth ||= :index
       actor = registry.actor_for(prefix)
 
